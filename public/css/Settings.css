@@ -1,0 +1,172 @@
+
+.tra,
+.collapse {
+  display: none;
+}
+.container{
+  display:flex;
+flex-wrap: wrap;
+}
+main form {
+  color:white ;
+  margin: 20px;
+  width:400px;
+  
+
+}
+
+.flexe{
+display: flex;
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+ 
+}
+.btn{
+  background-color: #f18384 !important;
+  border-color: #f18384 !important;
+}
+
+
+main form input,form select{
+  width:300px !important;
+  margin-bottom: 20px;
+}
+.box{
+  display:flex;
+  flex-direction: column;
+  margin-left:20px;
+}
+.input-container{
+  display:flex;
+  flex-wrap:wrap;
+  flex-direction: column;
+}
+
+
+.wrap{
+  display: flex
+ 
+}
+.btn{
+  width:200px;
+  height:50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+span{
+  font-size: 12px;
+}
+[data-tab-content] {
+  display:none
+}
+.active[data-tab-content]{
+display:block
+}
+.tab-container{
+  margin-top:30px;
+}
+.tabs{
+ list-style-type:none;
+ display: flex;
+ justify-content: space-around;
+ border-bottom: 2px solid black;
+}
+.tab{
+  cursor: pointer;
+  padding:10px;
+  width:100%;
+  text-align: center;
+  border-radius: 2px;
+  color: #fff;
+  font-size:25px;
+  font-weight: bold;
+}
+
+.tab.active{
+  background-color: #f18384;
+  color:white;
+}
+.alert{
+  margin-top:20px;
+}
+.add-tab{
+  margin-left:-40px;
+}
+@media screen and (max-width: 768px) {
+  .tra,
+.collapse {
+  display: block;
+}
+  main{
+  margin-left: -78px;
+  width: 100%;
+}
+fieldset{
+  width:300px;
+  
+}
+main form, .delete{
+  margin-left: -5px;
+}
+main form select,main form input{
+  width:200px !important;
+}
+
+ main form {
+  color:black;
+  margin: 20px;
+  width:300px;
+  margin-left:20px;
+  
+}
+.add, .delete,
+.update{
+  
+  margin-left:20px;
+
+}
+.add-tab{
+  margin-left: -40px;
+}
+
+.tra{
+    background-color: #f18384 !important;
+  }
+.navbar-name{
+    text-align: center;
+   color:#fff;
+   font-weight: bold;
+   margin: 3px 0 0 10px;
+  }
+  .list a {
+    text-decoration: none;
+    color:#fff;
+    list-style: none;
+  }
+.list, .links-container{
+width:100%;
+background-color: #f18384;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:80px;
+  margin-left:-20px;
+}
+.list li{
+  margin: 5px;
+  font-size: 15px;
+   list-style-type: none;
+  text-decoration: none;
+}
+.list button{
+  border: none;
+  background: none;
+ 
+  color: #fff;
+}
+
+
+}

@@ -1,0 +1,365 @@
+
+.home{
+  position: relative;
+  min-height: 100vh;
+  top: 0;
+  left: 78px;
+  width: calc(100% - 78px);
+  transition: all 0.5s ease;
+  z-index:2;
+}
+.tra,
+.collapse {
+  display: none;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.filter {
+  background-color: #f18384;
+ width:100%;
+  height: 50px;
+  margin-top: 50px;
+  border-radius: 10px 10px 0 0;
+}
+.filter .brand {
+  color: #fff;
+  display: flex;
+  margin-top: 10px;
+  width: 400px;
+  height: 150px;
+  margin-left: 15px;
+}
+.filter .brand label {
+  font-size: 20px;
+}
+.filter .button {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.filter .button .btn {
+  background-color: white;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  border-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filter .button .btn:hover {
+  background-color: #f18384;
+  color: white;
+}
+.filter .button .btn::after {
+  content: "Add";
+  width: 100px;
+
+  transition: 0.5s ease;
+}
+.filter .button .btn:hover::after {
+  content: "Add an Employee";
+  width: 250px;
+  background-color: #f18384;
+  color:white
+}
+.filter .brand select {
+  height: 20px;
+  margin-left: 5px;
+  width: 150px;
+  height: 25px;
+  font-size: 20px;
+}
+.filter .filters {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+table {
+  border-collapse: collapse;
+  background-color: #fff;
+  width:100%;
+  height: 200px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+table thead tr {
+  background-color: #f18384;
+  font-weight: bold;
+  text-align: left;
+  color: #fff;
+}
+.table th,
+table td {
+  padding: 12px 15px;
+}
+.tables{
+  width:100%
+}
+
+table tbody tr {
+  border-bottom: 1px solid #dddddd;
+  cursor: pointer;
+}
+table tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+.table.sticky thead,
+.table.sticky th {
+  position: sticky;
+  top: 0;
+}
+.table tbody tr:last-of-type {
+  border-bottom: 10px solid  #f18384;;
+}
+/* modal */
+.address.form input {
+  width: 560px;
+  height: 30px;
+}
+
+.close {
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 30px;
+  color: white;
+}
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 20px;
+}
+.form label {
+  font-size: 20px;
+}
+.form input {
+  font-size: 20px;
+  margin-left: 20px;
+  width: 250px;
+  margin-top: 5px;
+}
+.form select {
+  font-size: 20px;
+  width: 150px;
+  margin-left: 10px;
+}
+
+.modals {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 1px solid #000;
+  border-radius: 10px;
+  z-index: 10;
+  color: #fff;
+  background-color: #f18384;
+ 
+  width: 650px;
+  max-width: 80%;
+  height: 550px;
+}
+.modals.activate {
+  transform: translate(-50%, -50%) scale(1);
+}
+.modals-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modals-header h1 {
+  margin-left: 170px;
+}
+#overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  transition: 200ms ease-in-out;
+}
+#overlay.activate {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sale {
+  margin-left: 35%;
+  font-size: 30px;
+}
+
+.submit {
+  margin-top: 20px;
+  width: 560px;
+  height: 40px;
+  background-color: #fff;
+  border: 1px solid;
+  margin-left: 40px;
+  border-radius: 40px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.submit:hover {
+  background-color: #000428;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.messagess {
+  width: 1200px;
+  margin-top: 20px;
+}
+tr a{
+    text-decoration: none;
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+  .filter {
+ 
+    font-size: 20px;
+  }
+  .filter .brand select {
+    width: 100px;
+  }
+  table {
+
+    font-size: 10px;
+    min-width: 350px;
+  }
+  .alert{
+    width: 350px;
+  }
+
+  .tra,
+  .collapse {
+    display: block;
+  }
+
+  .select .sel{
+    height:30px;
+    font-size:13px;
+  }
+ 
+  h1 {
+    color: white;
+   
+  }
+  .store{
+    font-size: 22px;
+    margin-left:50px;
+  
+  }
+
+  .form label,
+  .form input {
+    font-size: 15px;
+  }
+  .form input {
+    width: 300px;
+    height: 20px;
+  }
+  ._id,
+  .authorization, .id {
+    display: none;
+  }
+
+
+  .btn .submit {
+    width: 280px;
+    border-radius: none;
+  }
+  .modals {
+    height: 650px;
+    top: 50%;
+  }
+  .modals-header h1 {
+    font-size: 25px;
+    margin-left: 60px;
+  }
+     main{
+  margin-left: -78px;
+  width: 100%;
+}
+.nav{
+ width:100%
+}
+.form{
+  margin: 5px !important;
+  margin-left: 10px  !important;
+}
+.form input{
+  width: 280px;
+  margin: 0;
+  margin-top: 10px;
+ 
+}
+.form select{
+  height:20px;
+  margin: 0;
+  
+}
+.submit{
+  margin-left: -10px;
+  
+}
+.modals-header .head{
+  font-size:20px;
+  margin-left:40px;
+}
+.tra{
+    background-color: #f18384 !important;
+  }
+.navbar-name{
+    text-align: center;
+   color:#fff;
+   font-weight: bold;
+   margin: 3px 0 0 10px;
+  }
+  .list a {
+    text-decoration: none;
+    color:#fff;
+    list-style: none;
+  }
+.list, .links-container{
+width:100%;
+background-color: #f18384;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:80px;
+  margin-left:-20px;
+}
+.list li{
+  margin: 5px;
+  font-size: 15px;
+   list-style-type: none;
+  text-decoration: none;
+}
+.list button{
+  border: none;
+  background: none;
+ 
+  color: #fff;
+}
+
+}

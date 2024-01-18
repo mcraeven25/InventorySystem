@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/Sidebar.css" />
+    <link rel="stylesheet" href="css/<%= name %>.css" />  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Oswald&family=Poppins&family=Source+Code+Pro&family=Space+Mono&display=swap');
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/@ericblade/quagga2@1.2.6/dist/quagga.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Parking-Master/Date.js@latest/date.min.js"></script>
+    <title><%= name %></title>
+  </head>
+<body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <div class="logo_name">Allworld Communications</div>
+        <i class="bx bx-menu" id="btn"></i>
+      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="/home">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+          <span class="tooltip">Dashboard</span>
+        </li>
+        <li>
+          <a href="/device">
+            <i class="bx bx-devices"></i>
+            <span class="links_name">Devices</span>
+          </a>
+          <span class="tooltip">Devices</span>
+        </li>
+        <li>
+          <a href="/report">
+            <i class="bx bxs-report"></i>
+            <span class="links_name">Reports</span>
+          </a>
+          <span class="tooltip">Report</span>
+        </li>
+          <li>
+          <a href="/stock-report">
+            <i class="bx bx-package"></i>
+            <span class="links_name">Stocks Report</span>
+          </a>
+          <span class="tooltip">Stocks Report</span>
+        </li>
+        <li>
+          <a href="/sale">
+            <i class='bx bx-line-chart'></i>
+            <span class="links_name">Sales</span>
+          </a>
+          <span class="tooltip">Sales</span>
+        </li>
+        <li>
+          <a href="/user">
+            <i class="bx bxs-user-account"></i>
+            <span class="links_name">Employees</span>
+          </a>
+          <span class="tooltip">Employees</span>
+        </li>
+        <li>
+          <a href="/product-codes">
+            <i class='bx bxs-barcode'></i>
+            <span class="links_name">Product Codes</span>
+          </a>
+          <span class="tooltip">Product Codes</span>
+        </li>
+        <li>
+          <a href="/returned">
+            <i class='bx bx-wrench'></i>
+            <span class="links_name">Repairs and Returns</span>
+          </a>
+          <span class="tooltip">Repairs and Returns</span>
+        </li>
+        <li>
+          <a href="/setting">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+          <span class="tooltip">Setting</span>
+        </li>
+        <li class="profile">
+          <div class="profile-details">
+            <div class="name_job">
+              <div class="name">Mc Raeven</div>
+              <div class="job">Admin</div>
+            </div>
+          </div>
+          <form action="/logout" method="POST">
+            <button>
+              <i class="bx bx-log-out" id="log_out"></i>
+            </button>
+          </form>
+        </li>
+      </ul>
+      
+    </div>
+    
+
+    <div class="collapse" id="navbarToggleExternalContent">
+  <div class=" p-4 links-container">
+   <ul class="nav-list list">
+          <a href="/home">
+             <li>Dashboard</li>
+          </a> 
+          <a href="/device">
+       <li>Devices</li>
+          </a>
+          <a href="/report">
+        <li> Reports</li>
+          </a>
+      <a href="/stock-report">
+        <li>Stocks Report</li>
+          </a>
+          <a href="/sale">
+       <li>Sales</li>
+          </a>
+          <a href="/user">
+        <li>Employees</li>
+          </a>
+          <a href="/product-codes">
+         <li>Product Codes</li>
+          </a>
+          <a href="/returned">
+         <li>Repairs and Returns</li>
+          </a>
+          <a href="/setting">
+         <li>Settings</li>
+          </a>
+          <li>
+          <form action="/logout" method="POST" class ="log-out">
+            <button class="logout">
+           Logout
+            </button>
+          </form>
+        </li>
+      </ul>
+  </div>
+</div>
+<div class="tra">
+<nav class="navbar navbar-dark nav">
+  <div class="container-fluid nav  d-flex justify-content-start ">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+    </button>
+    <h2 class="navbar-name">Allworld Communications</h2>
+
+  </div>
+  
+</nav>
+</div>

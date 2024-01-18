@@ -1,0 +1,433 @@
+<%- include('partials/head')%>
+<% if (filter && filter.length && !brand) { %> 
+<h1 class="heading"><span id="head"><%= filter %></span> Sales</h1>
+<% } else if (filter && filter.length && brand && brand.length) { %> 
+  <h1 class="heading"><span id="head"><%= brand %> Daily</span> Sales</h1>
+<% } else { %>
+  <h1 class="heading"> Sales</h1>
+  <% } %>
+  <div class="container">
+        <% if(messages && messages.length) { %>
+       <div class="d-flex justify-content-center mt-2 ">
+        <div class="alert alert-success alert-dismissible fade show w-100 " role="alert">
+            <%=messages %> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        </div>
+        <% } %> 
+         <% if(noResults && noResults.length) { %>
+       <div class="d-flex justify-content-center">
+        <div class="alert alert-danger alert-dismissible fade show w-100 " role="alert">
+            <%= noResults %> 
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        </div>
+        <% } %> 
+  <div class="filter">
+    <div class="filters" id ="filters">
+      <div class="brand">
+      <div class="brand-filter">
+      <label for="brand">Filter by brand:</label>
+      <select name="brand" id="brand">
+      </select>
+      </div>
+        <div class="search">
+        <label for="search">Search:</label>
+        <input type="text" id="search">
+      </div>
+      </div>
+      <div class="buttons">
+         <div>
+           <form action="/saless" method="POST">
+        <input type="button" id="btnExport" value="Export" class="export"/>
+        </form>
+      </div>
+        <div class="button">
+        <button data-modals-target="#modals" class="btn "></button>
+        </div>
+        </div>
+      </div>
+    </div>
+  <div class="tables wrapper" id="tblCustomers">
+  <h1 style="display:none;" id="dailysale">Daily</h1>
+    <table class = "table sticky">
+      <thead>
+        <tr>
+         <th>IMEI</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Variant</th>
+          <th>First Name</th>
+          <th class="lastName">Last Name</th>
+          <th>Number</th>
+          <th class="address">Address</th>
+          <th class="date">Date Sold</th>
+        </tr>
+      </thead>
+      <tbody id="body">
+      </tbody>
+    </table>
+  </div>
+</div>
+  <div class="modals" id="modals">
+    <div class="modals-header">
+      <h1 class="sale">Add a Sale</h1>
+      <button data-close-button class="close">&times;</button>
+    </div>
+    <div class="body">
+      <form action="/sale" method="POST" class="needs-validation" novalidate>
+       <div class="details">
+          <div class="imei form">
+            <label for="imei">IMEI:</label>
+            <input  type="number" class="form-control" name="imei" id="imei" required/>
+          </div>
+          <div class="first-name form">
+            <label for="first_name">First Name:</label>
+            <input  type="text" class="form-control" name="firstName" id="first_name" required/>
+          </div>
+          <div class="last_name form">
+            <label for="last_name">Last Name:</label>
+            <input  type="text" class="form-control" name="lastName" id="last_name" required/>
+          </div>
+          <div class="number form">
+            <label for="number">Mobile Number:</label>
+            <input type="number" class="form-control" name="number" id="number" maxlength="11" required/>
+          </div>
+          <div class="address form">
+            <label for="address">Address:</label>
+            <input  type="text" name="address" class="form-control" id="address" placeholder="City, Province" required/>
+          </div>
+          <div class="seller form">
+            <label for="seller">Seller:</label>
+             <select name="sellerID" id="seller">
+               <% for(user of users) { %> 
+                <% if (user.position == "Employee") {%>
+                <option value="<%=user.id %>"><%=user.firstName %> <%=user.lastName %></option>
+                <% } %>
+                 <% } %>
+             </select>
+          </div>
+        </div>
+        <div class="btn">
+        <button class="submit" type="submit">Submit form</button>
+      </div>
+   </form>
+    </div>
+  </div>
+  
+  </main>
+   <p id="sales" style="display:none"><%= sales %></p>
+   <p id="filter" style="display:none"><%= filter %></p>
+   <p id="branding" style="display:none"><%= brand %></p>
+   <div id="overlay"></div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" 
+   integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" 
+   integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+     <script  src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js" crossorigin="anonymous"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script >
+    let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let searchBtn = document.querySelector(".bx-search");
+let sale = document.getElementById("sales").innerText;
+
+let filter = document.getElementById("filter").innerText;
+let brands = document.getElementById("branding").innerText;
+let sales = JSON.parse(sale);
+let tables = document.getElementById("body")
+let openModalsButtons = document.querySelectorAll('[data-modals-target]')
+let closeModalsButtons = document.querySelectorAll('[data-close-button]')
+let overlay = document.getElementById('overlay')
+const month = date.js.month()
+const year = date.js.year()
+
+  if(filter === "Daily"){
+    for(let i=0; i<sales.length; i++){
+      const saleDate = new Date(sales[i].date)
+      const currentDate = new Date()
+      if(saleDate.setHours(0, 0, 0, 0) == currentDate.setHours(0, 0, 0, 0)){
+        let date = new Date(sales[i].date)
+        let row = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                      <td class="imei">${sales[i].imei}</td>
+                      <td class="brand">${sales[i].brand}</td>
+                      <td class="model">${sales[i].model}</td>
+                      <td class="variant">${sales[i].variant}</td>
+                      <td class="firstName">${sales[i].firstName}</td>
+                      <td class="lastName">${sales[i].lastName}</td>
+                      <td class="number">${sales[i].number}</td>
+                      <td class="address">${sales[i].address}</td>
+                      <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                      
+                    </tr> `
+        tables.innerHTML += row
+            $('#remove').remove();
+            $('#brand').prepend(` <option value="All" id="remove">All</option>`)      
+    }
+  }
+    $("body").on("click", "#btnExport", function () {
+            html2canvas($('#tblCustomers')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download(`${date.js.month()} ${today.getDate()}, ${date.js.year()} Sales.pdf`);
+                }
+               
+            });
+
+           
+          
+         
+        });
+  }else if(filter === "Brand"){
+    for(let i=0; i <sales.length; i++){
+    const saleDate = new Date(sales[i].date)
+    const currentDate = new Date()
+    if(sales[i].brand == brands && saleDate.setHours(0, 0, 0, 0) == currentDate.setHours(0, 0, 0, 0)){
+    let date = new Date(sales[i].date)
+    let row = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                  <td class="imei">${sales[i].imei}</td>
+                  <td class="brand">${sales[i].brand}</td>
+                  <td class="model">${sales[i].model}</td>
+                  <td class="variant">${sales[i].variant}</td>
+                  <td class="firstName">${sales[i].firstName}</td>
+                  <td class="lastName">${sales[i].lastName}</td>
+                  <td class="number">${sales[i].number}</td>
+                  <td class="address">${sales[i].address}</td>
+                  <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                  
+                </tr> `
+  tables.innerHTML += row
+    $('#remove').remove();
+    $('#brand').prepend(` <option value="All" id="remove">All</option>`)
+    } 
+  }
+    $("body").on("click", "#btnExport", function () {
+            html2canvas($('#tblCustomers')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download(`${date.js.month()} ${today.getDate()}, ${date.js.year()} ${brands} Sales.pdf`);
+                }
+            });
+        });
+     }else if(filter === "Monthly"){
+      for(let i=0; i<sales.length; i++){
+      const saleDate = new Date(sales[i].date)
+      const currentDate = new Date()
+      const zeroSale = new Date(saleDate.setHours(0, 0, 0, 0))
+      const zeroCurrent = new Date (currentDate.setHours(0, 0, 0, 0))
+      const saleMonth = zeroSale.getMonth()
+      const currentMonth = zeroCurrent.getMonth()
+      const saleYear = zeroSale.getYear()
+      const currentYear = zeroCurrent.getYear()
+        if(currentYear == saleYear && saleMonth == currentMonth){
+        let date = new Date(sales[i].date)
+        let row = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                      <td class="imei">${sales[i].imei}</td>
+                      <td class="brand">${sales[i].brand}</td>
+                      <td class="model">${sales[i].model}</td>
+                      <td class="variant">${sales[i].variant}</td>
+                      <td class="firstName">${sales[i].firstName}</td>
+                      <td class="lastName">${sales[i].lastName}</td>
+                      <td class="number">${sales[i].number}</td>
+                      <td class="address">${sales[i].address}</td>
+                      <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                      
+                    </tr> `
+        tables.innerHTML += row
+  $('#remove').remove();
+            $('#brand').prepend(` <option value="All" id="remove">All</option>`)
+    }
+  }
+  $("body").on("click", "#btnExport", function () {
+            html2canvas($('#tblCustomers')[0], {
+                onrendered: function (canvas) {
+                    var data = canvas.toDataURL();
+                    var docDefinition = {
+                        content: [{
+                            image: data,
+                            width: 500
+                        }]
+                    };
+                    pdfMake.createPdf(docDefinition).download(`${date.js.month()} ${date.js.year()} Sales.pdf`);
+                }
+            });
+        });
+ } else {
+      for(let i=0; i <sales.length; i++){
+        let date = new Date(sales[i].date)
+        let row = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                      <td class="imei">${sales[i].imei}</td>
+                      <td class="brand">${sales[i].brand}</td>
+                      <td class="model">${sales[i].model}</td>
+                      <td class="variant">${sales[i].variant}</td>
+                      <td class="firstName">${sales[i].firstName}</td>
+                      <td class="lastName">${sales[i].lastName}</td>
+                      <td class="number">${sales[i].number}</td>
+                      <td class="address">${sales[i].address}</td>
+                      <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                      
+                    </tr> `
+      tables.innerHTML += row
+       
+  }
+}
+
+
+
+  filters
+  let brand = []
+  let model = []
+ 
+  for (sale of sales) {
+        brand.push(sale.brand)
+    }
+  for (sale of sales) {
+        model.push(sale.model)
+    }
+ 
+
+ let uniqueBrand = [...new Set(brand)]
+  let uniqueModel = [...new Set(model)]
+
+
+  for(uniqueItem of uniqueBrand) {
+    $('<option/>')
+    .val(uniqueItem)
+    .text(`${uniqueItem}`)
+    .appendTo('#brand')
+      
+  }
+
+let maxLength = 11;
+$(document).ready(function(){
+    $('#number').on('keydown keyup change', function(){
+        let char = $(this).val();
+        let charLength = $(this).val().length;
+        if(charLength > maxLength){
+            $(this).val(char.substring(0, maxLength));
+       
+        }
+    });
+});
+  
+
+      
+  
+
+
+
+    document.getElementById("brand").selectedIndex = -1;
+   
+  
+   $('#brand').on('change', function(){
+       $('#body').html('');
+        $('#head').remove();
+      for(let i=0; i<sales.length; i++){
+      if($('#brand').val()==sales[i].brand){
+      let date = new Date(sales[i].date)
+      let options = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                    <td class="imei">${sales[i].imei}</td>
+                    <td class="brand">${sales[i].brand}</td>
+                    <td class="model">${sales[i].model}</td>
+                    <td class="variant">${sales[i].variant}</td>
+                    <td class="firstName">${sales[i].firstName}</td>
+                    <td class="lastName">${sales[i].lastName}</td>
+                    <td class="number">${sales[i].number}</td>
+                    <td class="address">${sales[i].address}</td>
+                    <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                  </tr> `
+     $('#body').append(options)
+      
+
+    }else if($('#brand').val()=="All"){
+     let date = new Date(sales[i].date)
+     let options = `<tr onclick="window.location='sales/${sales[i].imei}'">
+                    <td class="imei">${sales[i].imei}</td>
+                    <td class="brand">${sales[i].brand}</td>
+                    <td class="model">${sales[i].model}</td>
+                    <td class="variant">${sales[i].variant}</td>
+                    <td class="firstName">${sales[i].firstName}</td>
+                    <td class="lastName">${sales[i].lastName}</td>
+                    <td class="number">${sales[i].number}</td>
+                    <td class="address">${sales[i].address}</td>
+                    <td class="date">${date.getMonth()+1} / ${date.getDate()}  / ${date.getFullYear()}</td>
+                  </tr> `
+     $('#body').append(options)
+  }
+}
+
+      });
+
+      $('#brand').one('change', function(){
+          $('#remove').remove();
+          $('#brand').prepend(`<option value="All">All</option>`)
+            });
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+// modals
+    openModalsButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modals = document.querySelector(button.dataset.modalsTarget)
+        openModals(modals)
+       })
+      })
+
+    closeModalsButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modals = button.closest('.modals')
+          closeModals(modals)
+      })
+        })
+
+    function openModals(modals) {
+      if (modals == null) return
+      modals.classList.add('activate')
+      overlay.classList.add('activate')
+      }
+
+    function closeModals(modals) {
+      if (modals == null) return
+      modals.classList.remove('activate')
+      overlay.classList.remove('activate')
+      }
+      
+    overlay.addEventListener('click', () => {
+      const modalss = document.querySelectorAll('.modals.activate')
+        modalss.forEach(modals => {
+        closeModals(modals)
+       })
+        })
+      
+
+      
+  
+     
+     
+
+    
+ </script>
+  </body>
+</html>

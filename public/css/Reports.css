@@ -1,0 +1,155 @@
+
+.tra,
+.collapse {
+  display: none;
+}
+.wrap .phones h1 {
+  color: #fff;
+  text-align: center;
+}
+.label {
+  font-size: 50px;
+  padding-top: 40px;
+  color: #f18384;
+  text-align: center;
+}
+.container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.monthly {
+  width: 900px;
+  height: auto;
+  background-color: #f18384;
+  margin-top: 40px;
+  border-radius: 20px;
+}
+.phones {
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+}
+.phone {
+  width: 250px;
+  margin: 50px 50px;
+}
+.wrap {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+ 
+}
+.label{
+  color:#fff !important;
+  
+  margin-bottom: 10px;
+}
+[data-tab-content] {
+  display:none
+}
+.active[data-tab-content]{
+display:block
+}
+.tab-container{
+  margin-top:30px;
+}
+.tabs{
+ list-style-type:none;
+ display: flex;
+ justify-content: space-around;
+ border-bottom: 2px solid black;
+ width:100%;
+}
+.tab{
+  cursor: pointer;
+  padding:10px;
+  padding-left: 0;
+  width:100%;
+  text-align: center;
+  border-radius: 2px;
+  color:#fff;
+  font-size:20px;
+  font-weight: bold;
+ 
+}
+.monthly-tab{
+  margin-left: -50px;
+}
+
+.tab.active{
+  background-color: #f18384;
+  color:white;
+  width:100%;
+}
+
+
+@media screen and (max-width: 768px) {
+  .tra,
+  .collapse {
+    display: block;
+  }
+ 
+  .name {
+    color: white;
+    margin-left: 35%;
+    font-size: 25px !important;
+  }
+  .phone {
+    width: 300px;
+    margin: 50px 50px;
+  }
+   main{
+  margin-left: -78px;
+  width: 100%;
+}
+h1{
+  font-size: 25px !important;
+}
+.monthly{
+  width: 400px;
+}
+.tab{
+  font-size:15px;
+}
+ .tra{
+    background-color: #f18384 !important;
+  }
+  .navbar-name{
+    text-align: center;
+   color:#fff;
+   font-weight: bold;
+   margin: 3px 0 0 10px;
+  }
+  .list a {
+    text-decoration: none;
+    color:#fff;
+    list-style: none;
+  }
+.list, .links-container{
+width:100%;
+background-color: #f18384;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:80px;
+  margin-left:-20px;
+}
+.list li{
+  margin: 5px;
+  font-size: 15px;
+   list-style-type: none;
+  text-decoration: none;
+}
+.list button{
+  border: none;
+  background: none;
+  color: #fff;
+}
+}

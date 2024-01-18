@@ -1,0 +1,242 @@
+<%- include('partials/head')%>
+<section class="home-section">
+  <div class="form">
+    <div class="modal" id="repair_form">
+      <div class="header"> 
+        <div class="title">Add repair</div>
+        <button class="btn close-modal">&times;</button>
+      </div>
+      <div class="body">
+        <!-- <form action="/repair" method="POST"> -->
+        <input type="number" id="imei" placeholder="Phone's IMEI"/>
+        <input type="text" id="reason" placeholder="Reason for Repair">
+
+        <input type="submit" value="Confirm" id="submit" />
+        <!-- </form> -->
+      </div>
+    </div>
+    </div>
+    <!-- repair -->
+     <div class="repair-container">
+      <div class="status pending" id="no_status">
+        <h1>No Status</h1>
+        <button id="add_btn" data-target-modal="#repair_form">+ Add repair</button>
+        <% for (repair of repairs) {%> 
+           <% if(repair.status == "pending"){ %> 
+        <div class="repair" draggable="true">
+          <div class="details">
+           <form action="/user?_method=PUT" method="Post" id = "pending">
+           <label for="imei" >IMEI:</label>
+           <input type="number" name="imei" value="<%= repair.imei %>" /> 
+           <label for="phone" >Phone:</label>
+           <input type="text" name="phone" value="<%= repair.brand %> <%= repair.model %>" /> 
+           <label for="reason" >Reason:</label>
+           <input type="text" name="reason" value="<%= repair.reason %>" /> 
+           <label for="owner" >Owner:</label>
+           <input type="text" name="owner" value="<%= repair.firstName %> <%= repair.lastName %>" />
+            <label for="number" >Number:</label>
+           <input type="number" name="number" value="<%= repair.number %>" />
+           <input type="hidden" value="pending" name="status" class="target">
+           </div>
+           </form>
+          <span class="close">&times;</span>
+        </div>
+        <% } %> 
+         <% } %> 
+      </div>
+      <div class="status ongoing">
+        <h1>Not Started</h1>
+         <% for (repair of repairs) {%> 
+           <% if(repair.status == "pending"){ %> 
+        <div class="repair" draggable="true" onclick="onclick">
+          <div class="details">
+          <p>IMEI:<%= repair.imei %></p> 
+           <p>Phone: <%= repair.brand %> <%= repair.model %></p>
+           <p>Reason for Repair:<%= repair.reason %></p>
+           <p>Owner: <%= repair.firstName %> <%= repair.lastName %></p>
+           <p>Mobile Number: <%= repair.number %></p>
+           </div>
+          <span class="close">&times;</span>
+        </div>
+        <% } %> 
+         <% } %> 
+      </div>
+      <div class="status finished">
+        <h1>In Progress</h1>
+         <% for (repair of repairs) {%> 
+           <% if(repair.status == "pending"){ %> 
+        <div class="repair" draggable="true">
+          <div class="details">
+          <p>IMEI:<%= repair.imei %></p> 
+           <p>Phone: <%= repair.brand %> <%= repair.model %></p>
+           <p>Reaso n for Repair:<%= repair.reason %></p>
+           <p>Owner: <%= repair.firstName %> <%= repair.lastName %></p>
+           <p>Mobile Number: <%= repair.number %></p>
+           </div>
+          <span class="close">&times;</span>
+        </div>
+        <% } %> 
+         <% } %> 
+      </div>
+      
+    </div>
+
+    <div id="overlay"></div>
+</section>
+    <script >
+let sidebar = document.querySelector(".sidebar");
+let closeBtn = document.querySelector("#btn");
+let searchBtn = document.querySelector(".bx-search");
+
+let form = document.getElementById('pending')
+
+closeBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("open");
+  menuBtnChange();
+});
+
+function menuBtnChange() {
+  if (sidebar.classList.contains("open")) {
+    closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+  } else {
+    closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+  }
+}
+
+const repairs = document.querySelectorAll(".repair");
+const all_status = document.querySelectorAll(".status");
+let draggablerepair = null;
+
+repairs.forEach((repair) => {
+  repair.addEventListener("dragstart", dragStart);
+  repair.addEventListener("dragend", dragEnd);
+});
+
+function dragStart() {
+  draggablerepair = this;
+  setTimeout(() => {
+    this.style.display = "none";
+  }, 0);
+ ;
+}
+
+function dragEnd() {
+  
+  setTimeout(() => {
+    this.style.display = "block";
+  }, 0);
+  console.log(this)
+  // form.submit()
+}
+
+all_status.forEach((status) => {
+  status.addEventListener("dragover", dragOver);
+  status.addEventListener("dragenter", dragEnter);
+  status.addEventListener("dragleave", dragLeave);
+  status.addEventListener("drop", dragDrop);
+});
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dragEnter() {
+  this.style.border = "1px solid #ccc";
+}
+
+function dragLeave() {
+  this.style.border = "none";
+}
+
+function dragDrop() {
+  this.style.border = "none";
+  this.appendChild(draggablerepair);
+  // let targ =  document.querySelector(`*> input.target`)
+  // console.log(this)
+ 
+  // // let drag = 4.lastElementChild.tagName
+  
+  // console.log(targ)
+  //  let stat = document.parentElement.className
+ 
+  // form.submit()
+}
+
+/* modal */
+const btns = document.querySelectorAll("[data-target-modal]");
+const close_modals = document.querySelectorAll(".close-modal");
+const overlay = document.getElementById("overlay");
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(btn.dataset.targetModal).classList.add("active");
+    overlay.classList.add("active");
+  });
+});
+
+close_modals.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".modal");
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+});
+
+window.onclick = (event) => {
+  if (event.target == overlay) {
+    const modals = document.querySelectorAll(".modal");
+    modals.forEach((modal) => modal.classList.remove("active"));
+    overlay.classList.remove("active");
+  }
+};
+
+/* create repair  */
+const submit = document.getElementById("submit");
+
+submit.addEventListener("click", createrepair);
+
+function createrepair() {
+  const repair_div = document.createElement("div");
+  const input_val = document.getElementById("imei").value;
+  const repair_val = document.getElementById("reason").value;
+  const txt = document.createTextNode(input_val);
+  const reason = document.createTextNode(repair_val);
+
+  repair_div.appendChild(`IMEI: ${txt}`);
+  repair_div.appendChild(reason);
+  repair_div.classList.add("repair");
+  repair_div.setAttribute("draggable", "true");
+
+  /* create span */
+  const span = document.createElement("span");
+  const span_txt = document.createTextNode("\u00D7");
+  span.classList.add("close");
+  span.appendChild(span_txt);
+
+  repair_div.appendChild(span);
+
+  no_status.appendChild(repair_div);
+
+  span.addEventListener("click", () => {
+    span.parentElement.style.display = "none";
+  });
+
+  repair_div.addEventListener("dragstart", dragStart);
+  repair_div.addEventListener("dragend", dragEnd);
+
+  document.getElementById("imei").value = "";
+  repair_form.classList.remove("active");
+  overlay.classList.remove("active");
+}
+
+const close_btns = document.querySelectorAll(".close");
+
+close_btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    btn.parentElement.style.display = "none";
+  });
+});
+</script>
+  </body>
+</html>
+

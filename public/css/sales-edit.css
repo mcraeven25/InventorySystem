@@ -1,0 +1,135 @@
+
+.container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+.form{
+    background-color: #f18384;
+    margin-top: 50px;
+    height:600px;
+    width:600px;
+    border-radius: 5px;
+    box-shadow: 5px 2px 2px 2px black;
+    color:white
+    
+}
+.tra,
+.collapse {
+  display: none;
+}
+.details{
+    width:80%;
+    margin-left: 30px;
+  
+}
+.form h1{
+    text-align: center;
+    margin: 20px 0
+}
+.form label{
+    font-size: 20px;
+}
+.form input{
+    width:300px;
+    height:40px;
+}
+.box{
+    justify-content: space-between;
+    display: flex;
+    margin:30px 0;
+}
+.bt{
+    border-radius: 40px;
+    width: 490px;
+  font-size: 30px;
+ background-color:white;
+}
+.submit{
+    margin-left: 30px;
+    padding-top: 30px;
+     
+}
+
+.alert{
+  width:610px;
+}
+@media screen and (max-width: 768px) {
+    .tra,.collapse{
+        display: block;
+    }
+ 
+  .logout {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+  }
+  .nav{
+      width: 390px;
+  }
+ main{
+  margin-left: -78px;
+  width: 100%; 
+  }
+  
+  .form{
+      width:400px;
+      margin-left: -20px;
+  }
+  .alert{
+    width:400px;
+  }
+  .form select, .form input, .form label{
+      font-size: 20px;
+
+  }
+  .form select, .form input {
+    height: 30px;
+    width: 200px;
+  }
+  .form button{
+      width:300px;
+  }
+  .tra{
+    background-color: #f18384 !important;
+  }
+  .navbar-name{
+    text-align: center;
+   color:#fff;
+   font-weight: bold;
+   margin: 3px 0 0 10px;
+  }
+  .list a {
+    text-decoration: none;
+    color:#fff;
+    list-style: none;
+  }
+.list, .links-container{
+width:100%;
+background-color: #f18384;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:80px;
+  margin-left:-20px;
+}
+.list li{
+  margin: 5px;
+  font-size: 15px;
+   list-style-type: none;
+  text-decoration: none;
+}
+.list button{
+  border: none;
+  background: none;
+ 
+  color: #fff;
+}
+  
+}

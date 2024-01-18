@@ -1,0 +1,493 @@
+<%- include('partials/head')%>
+<main>
+<h1 class="heading">Settings</h1>
+<%- include('partials/settings-flash')%>
+  <div class="tab-container">
+  <ul class = "tabs">
+    <li data-tab-target="#add" class ="tab active add-tab">Add</li>
+    <li data-tab-target="#delete" class ="tab">Delete</li>
+    <li data-tab-target="#update" class ="tab">Update</li>
+  </ul>
+  </div>
+    <div class="tab-content">
+    <div class="add active flexx" id="add" data-tab-content>
+      <div class="flexe">
+        <div>
+      <div class="add-brand">
+          <form action="/setting" method="POST" class="needs-validation"  novalidate>
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Add a new Brand:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="brand">
+              <div class = "box">
+              <label for="brand-brand">Brand: </label>
+               <input type="text" name="brand" id="brand-brand" class="form-control" required/>
+               </div>
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+          </div>
+           <div class="add-color" id="grid-color">
+          <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Add a new Colorway:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="color">
+              <div class = "box">
+              <label for="color-brand">Brand: </label>
+               <select class="hide form-select" name="brand" id="color-brand"  required>
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="color-model"> Model:</label>
+             <select class="hide form-select" name="model" id="color-model"  required>
+              
+               </select>
+               </div>
+              <div class = "box">
+             <label for="color-variant"> Variant: <span></span></label>
+              <select class="hide form-select" name="variant" id="color-variant"  required>
+              
+               </select>
+               </div>
+                 <div class = "box">
+               <label for="color-color">Color:</label>
+               <input type="text" name="color" id="color-color" placeholder= "Add a color" class="form-control" required/>
+               </div>
+              
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+      </div>
+       <div class="add-model">
+          <form class="needs-validation" novalidate action="/setting" method="POST">
+          <fieldset class="border border-light  border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Add a new Model:</legend>
+           <div class="wrap">
+             <div class="input-container">  
+               <input type="hidden" name="type" value="model">
+              <div class = "box">
+              <label for="model-brand">Brand: </label>
+               <select class="hide form-select" name="brand" id="model-brand"  required>
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="model-model"> Model:</label>
+               <input type="model" name="model" id="model-model" class="form-control" required/>
+               </div>
+              <div class = "box">
+               <label for="model-variant"> Variant: <span>Ram / Rom</span></label>
+               <input type="variant" name="variant" id="model-variant" placeholder="ex. 8gb / 128gb" class="form-control" required/>
+               </div>
+              <div class = "box">
+               <label for="model-color">Colors: <span>(Separate colors by a comma)</span></label>
+               <input type="text" name="color" id="model-color" placeholder= " ex. Blue, Red, Green" class="form-control" required/>
+               </div>
+              <div class = "box">
+               <label for="price">Price:</label>
+               <input type="number" name="prices" id="price" class="form-control" required/>
+               </div>
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+      <div class="add-variant">
+          <form class="needs-validation" novalidate action="/setting" method="POST">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Add a new Variant:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="variant">
+              <div class = "box">
+              <label for="variant-brand">Brand: </label>
+               <select class="hide form-select" name="brand" id="variant-brand" required>
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="variant-model"> Model:</label>
+             <select class="hide form-select" name="model" id="variant-model" required>
+              
+               </select>
+               </div>
+              <div class = "box">
+             <label for="variant-variant"> Variant: <span>Ram / Rom</span></label>
+               <input type="variant" name="variant" id="variant-variant" placeholder="ex. 8gb / 128gb" class="form-control" required/>
+               </div>
+                 <div class = "box">
+               <label for="model-color">Colors: <span>(Separate colors by a comma)</span></label>
+               <input type="text" name="color" id="model-color" placeholder= " ex. Blue, Red, Green" class="form-control" required/>
+               </div>
+              <div class = "box">
+               <label for="variant-price">Price:</label>
+               <input type="number" name="prices" id="variant-price" class="form-control"/>
+               </div>
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+          </div>
+      </div>
+      
+      </div>
+      <div class="delete" id="delete" data-tab-content>
+        <div class="flexe">
+          <div>
+          <div class="delete-brand">
+          <form class="needs-validation" novalidate action="/setting?_method=DELETE" method="POST" class="delete">
+          <fieldset class="border border-light border-5 rounded p-2 h-100">
+           <legend class="float-none w-auto p-2">Delete a Brand:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="brand">
+              <div class = "box">
+              <label for="delete-brand">Brand: </label>
+               <select class="hide form-select"  name="brand" id="delete-brand" required>
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+        <div class="Delete-color">
+          <form class="needs-validation" novalidate action="/setting?_method=DELETE" method="POST" class="delete">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Delete a Colorway:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="color">
+              <div class = "box">
+              <label for="delete-color-brand">Brand: </label>
+               <select class="hide form-select" required name="brand" id="delete-color-brand">
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="delete-color-model"> Model:</label>
+             <select class="hide form-select" required name="model" id="delete-color-model">
+              
+               </select>
+               </div>
+              <div class = "box">
+             <label for="delete-color-variant"> Variant: <span></span></label>
+              <select class="hide form-select" required name="variant" id="delete-color-variant">
+              
+               </select>
+               </div>
+                 <div class = "box">
+               <label for="delete-color">Color:</label>
+              <select class="hide form-select" required name="color" id="delete-color">
+              
+               </select>
+               </div>
+              
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+      </div>
+       <div class="delete-model">
+           <form class="needs-validation" novalidate action="/setting?_method=DELETE" method="POST" class="delete">
+          <fieldset class="border border-light border-5 rounded p-2 ">
+           <legend class="float-none w-auto p-2">Delete a Model:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="model">
+              <div class = "box">
+              <label for="delete-model-brand">Brand: </label>
+               <select class="hide form-select" required  name="brand" id="delete-model-brand" >
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+                <div class = "box">
+              <label for="delete-model">Model: </label>
+               <select class="hide form-select" required  name="model" id="delete-model" >
+                   
+                </select>
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+       <div class="delete-variant">
+           <form class="needs-validation" novalidate action="/setting?_method=DELETE" method="POST" class="delete">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Delete a Variant:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="variant">
+              <div class = "box">
+              <label for="delete-variant-brand">Brand: </label>
+               <select class="hide form-select" required  name="brand" id="delete-variant-brand" >
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+                <div class = "box">
+              <label for="delete-variant-model">Model: </label>
+               <select class="hide form-select" required  name="model" id="delete-variant-model" >
+                   
+                </select>
+               </div>
+                 <div class = "box">
+              <label for="delete-variant">Variant: </label>
+               <select class="hide form-select" required  name="variant" id="delete-variant" >
+                   
+                </select>
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+    
+      </div>
+      </div>
+      <div class="update" id="update" data-tab-content>
+        <div class="flexe">
+          <div>
+          <div class="update-brand">
+          <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST" class="update">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Update a Brand:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="brand">
+              <div class = "box">
+              <label for="update-brand">Brand: </label>
+               <select class="hide form-select" required id="update-brand" name="findBrand" >
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+               <div class="box">
+                 <input type="text" name="brand" value="" id="brand-input" class="form-control" required>
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+       <div class="update-color">
+          <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST" class="update">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Update a Colorway:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="color-update">
+              <div class = "box">
+              <label for="update-color-brand">Brand: </label>
+               <select class="hide form-select" required name="brand" id="update-color-brand">
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="update-color-model"> Model:</label>
+             <select class="hide form-select" required name="model" id="update-color-model">
+              
+               </select>
+               </div>
+              <div class = "box">
+             <label for="update-color-variant"> Variant: <span></span></label>
+              <select class="hide form-select" required name="variant" id="update-color-variant">
+              
+               </select>
+               </div>
+                 <div class = "box">
+               <label for="update-color">Color:</label>
+              <select class="hide form-select" required name="color" id="update-color">
+              
+               </select>
+               </div>
+               <div class="box">
+                 <input type="text" id="color-input" name="updateColor" class="form-control" required>
+               </div>
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+      </div>
+      <div>
+       <div class="update-model">
+           <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST" class="update">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Update a Model:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="model">
+              <div class = "box">
+              <label for="update-model-brand">Brand: </label>
+               <select class="hide form-select" required  name="brand" id="update-model-brand" >
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+                <div class = "box">
+              <label for="update-model">Model: </label>
+               <select class="hide form-select" required  name="model" id="update-model" >
+                   
+                </select>
+               </div>
+               <div class="box">
+                 <input class="form-control" required name="updateModel" value="" id="model-input">
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+       <div class="update-price">
+          <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST" class="update">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Update Price:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="price">
+              <div class = "box">
+              <label for="update-price-brand">Brand: </label>
+               <select class="hide form-select" required name="brand" id="update-price-brand">
+                  <% for (let brand of brands) { %> 
+             <option value="<%= brand.brand %>"><%= brand.brand %></option>
+             <% } %>
+               </select>
+               </div>
+              <div class = "box">
+              <label for="update-price-model"> Model:</label>
+             <select class="hide form-select" required name="model" id="update-price-model">
+              
+               </select>
+               </div>
+              <div class = "box">
+             <label for="update-price-variant"> Variant: <span></span></label>
+              <select class="hide form-select" required name="variant" id="update-price-variant">
+              
+               </select>
+               </div>
+                 <div class = "box">
+               <label for="update-price">Price:</label>
+              <input class="form-control" required name="price" id="update-price" val="">
+              <input type="hidden" class="hide" name="oldPrice" id="old-price" val="">
+               </div>
+               <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+              </div>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+    </div>
+       <div class="update-variant">
+           <form class="needs-validation" novalidate action="/setting?_method=PUT" method="POST" class="update">
+          <fieldset class="border border-light border-5 rounded p-2">
+           <legend class="float-none w-auto p-2">Update a Variant:</legend>
+           <div class="wrap">
+             <div class="input-container">
+               <input type="hidden" name="type" value="variant">
+              <div class = "box">
+              <label for="update-variant-brand">Brand: </label>
+               <select class="hide form-select" required  name="brand" id="update-variant-brand" >
+                   <% for (let brand of brands) { %> 
+                    <option value="<%= brand.brand %>"><%= brand.brand %></option>
+                   <% } %>
+                </select>
+               </div>
+                <div class = "box">
+              <label for="update-variant-model">Model: </label>
+               <select class="hide form-select" required  name="model" id="update-variant-model" >
+                   
+                </select>
+               </div>
+                 <div class = "box">
+              <label for="update-variant">Variant: </label>
+               <select class="hide form-select" required  name="variant" id="update-variant" >
+                   
+                </select>
+               </div>
+               <div class="box">
+                 <input type="text" name="updateVariant" id="variant-input" class="form-control" required>
+               </div>
+                <div class = "box">
+              <button class="btn btn-primary" type="submit">Submit</button>
+              </div>
+          </fieldset>
+          </form>
+      </div>
+     
+     
+      </div>
+      </div>
+      <div id="loading">
+  <img id="loading-image" src="/css/Rolling-1s-200px.gif" alt="Loading..." />
+      </div>
+    </div>
+    
+    <p id="models" style="display: none;"><%= models %> </p>
+     <p id="variants" style="display: none;"><%= variants %> </p>
+      <p id="colors" style="display: none;"><%= colors %> </p>
+      <p id="prices" style="display: none;"><%= prices %> </p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" 
+   integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" 
+   integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+  
+  <script src="scripts/settings.js">
+    
+  </script>
+  <%- include('partials/end')%>
+ 
+

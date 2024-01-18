@@ -1,0 +1,280 @@
+.container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width:100%;
+  flex-wrap: wrap;
+  margin-top: 40px;;
+ 
+  
+}
+
+.graph {
+  width: 600px;
+  height: auto;
+  background-color: #f18384;
+  margin-top: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;;
+  box-shadow: 5px 5px 2px 1px black;
+  padding:20px;
+  
+}
+.tra,
+.collapse {
+  display: none;
+}
+.box {
+  background-color: #f18384;
+  text-align: center;
+  max-height: 200px;
+  height:150px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 2px 1px black;
+
+  color:white !important;
+}
+.sales {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  width:550px;
+  height:170px;
+  color: #fff;
+  text-align: center;
+  background-color: #f18384;
+  border-radius: 10px;
+  box-shadow: 5px 5px 2px 1px black;
+  border: 2px solid black
+}
+ .box input{
+  color:black;
+  font-size: 25px;
+}
+.sales input {
+  color:white;
+  font-size: 30px;
+}
+
+
+.box h1{
+  font-size: 25px !important;
+}
+
+h1 {
+  font-size: 30px ;
+  padding-top: 20px;
+  color: white;
+  font-weight:bold;
+  font-family: 'Helvetica'
+}
+
+.info {
+  display: flex;
+  justify-content: space-around;
+  height: 200px;
+  align-items: center;
+  padding-top: 100px;
+  width:100%;
+}
+.phones {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 400px;
+  
+ 
+}
+input {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+input:focus {
+  outline: 0;
+}
+
+
+
+.edit:focus {
+  outline: none;
+  background-color: white;
+  color: black;
+}
+
+.flash {
+  display: flex;
+  justify-content: center;
+  background-color: #50c878;
+  color: white;
+}
+
+#monthly3{
+  margin-left: 17%;
+  width: 800px;
+}
+#loading {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 99;
+}
+
+#loading-image {
+  z-index: 100;
+}
+@media screen and (max-width: 768px) {
+ .sales{
+   width:150px;
+   
+
+ }
+ .info{
+   display: flex;
+   justify-content: space-around;
+   margin-left:  5px !important;
+ }
+ .daily{
+ 
+   margin-left: -8px;
+ }
+ .monthly{
+   margin: 0;
+   margin-left:32px;
+ }
+
+ 
+  h1 {
+    font-size: 20px !important;
+    padding: 15px;
+  }
+  p {
+    font-size: 14px !important;
+  }
+  .box {
+    width: 150px;
+   
+  }
+  .phones{
+     margin-left:  20px !important;
+   
+  }
+  .container{
+    flex-direction: column;
+   width: 100%;
+  }
+
+  .box input {
+   margin-top: -30px;
+   margin-bottom: 10px;
+  }
+  .box h1{
+    font-size: 20zpx !important;
+  }
+  .tra, .collapse{
+    display: block;
+
+  }
+  
+
+  .name {
+    color: white;
+    margin-left: 35%;
+    font-size: 30px !important;
+  }
+  .sidebar.open, .sidebar{
+    display:none
+  }
+  .info{
+    margin-left: -60px;
+
+  }
+  .phones{
+    margin: 0;
+   margin-top: 50px;
+  
+  }
+ .nav h1{
+   font-size: 30px;
+   color: #fff;
+   margin-top:10px;
+   margin-left: 50px;
+ }
+
+  main{
+  margin-left: -78px;
+  width: 100%;
+  height: 100%;
+}
+nav{
+  height: 90px;
+}
+.graph{
+  width:350px;
+ 
+}
+#monthly2, #dailyGraph{
+ margin-right: 80px;
+}
+
+#monthly3{
+  margin:0;
+  margin-right: 80px;
+  width: 350px;
+  margin-bottom: 40px;
+}
+ .tra{
+    background-color: #f18384 !important;
+  }
+  .navbar-name{
+    text-align: center;
+   color:#fff;
+   font-weight: bold;
+   margin: 3px 0 0 10px;
+  }
+  .list a {
+    text-decoration: none;
+    color:#fff;
+    list-style: none;
+  }
+.list, .links-container{
+width:100%;
+background-color: #f18384;
+}
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:80px;
+  margin-left:-20px;
+}
+.list li{
+  margin: 5px;
+  font-size: 15px;
+   list-style-type: none;
+  text-decoration: none;
+}
+.list button{
+  border: none;
+  background: none;
+ 
+  color: #fff;
+}
+ 
+ 
+}

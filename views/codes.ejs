@@ -1,0 +1,57 @@
+<% if (user === "Manager") { %> 
+<%- include('partials/head')%>
+<% } else if (user === "Employee") { %>
+<%- include('partials/head-employee')%>
+<% } %>
+
+<main>
+  <h1 class="heading">Product Codes</h1>
+  <div class="container">
+  <div class="filter">
+      <div class="brand">
+      <label for="brand">Filter by brand:</label>
+      <select name="brand" id="brand">
+      </select>
+      </div>
+      <div class="search">
+        <label for="search">Search:</label>
+        <input type="text" id="search">
+      </div>
+    </div>
+   
+  <div class="tables wrapper">
+    <table class = "table sticky">
+      <thead>
+        <tr>
+          <th>Product Code</th>
+          <th>Brand</th>
+          <th>Model</th>
+          <th>Variant</th>
+          <th>Color</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody id="body">
+       
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <div id="loading">
+  <img id="loading-image" src="/css/Rolling-1s-200px.gif" alt="Loading..." />
+      </div>
+  </main>
+  <p id="codes" style="display:none"><%= codes %></p>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" 
+   integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" 
+   integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="scripts/product-codes.js">
+   
+
+
+    </script>
+  
+  </body>
+</html>
+

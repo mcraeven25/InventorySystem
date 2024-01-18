@@ -1,0 +1,39 @@
+{
+  "name": "capstone-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "nodemon": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@zxing/library": "^0.19.1",
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "chartjs-plugin-datalabels": "^2.0.0",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^4.6.0",
+    "datejs": "^1.0.0-rc3",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "flash": "^1.1.0",
+    "fs-browsers": "^1.1.6",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.7",
+    "node-cron": "^3.0.0",
+    "nodemailer": "^6.7.3",
+    "nodemon": "^2.0.16",
+    "path": "^0.12.7",
+    "quagga": "^0.12.1",
+    "reselect": "^4.1.6",
+    "twilio": "^3.75.1",
+    "uuid": "^8.3.2"
+  }
+}
